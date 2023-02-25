@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import useStore from './store/Index'
 import './App.css'
+import Counter from './Counter'
+import Bears from './Bears'
 
 function App() {
   const [count, setCount] = useState(0)
-  const {state} = useStore((state) => ({state: state}))
-  console.log("🚀 ~ file: App.tsx:9 ~ App ~ clear", state)
 
   return (
     <div className="App">
@@ -20,11 +19,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => {setCount((count) => count + 1); state.increase(1)}}>
-          count is {count}, bears is {state.cart}
-        </button>
+        <Counter /> <Bears />
         <p>
-          Edit <code onClick={() =>state.addBear()}>src/App.tsx</code> and save to test HMR
+          Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
       <p className="read-the-docs">
