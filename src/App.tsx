@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import useCartStore from './store/cart'
+import useStore from './store/Index'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  const {increase, bears, clear} = useCartStore((state) => ({increase: state.increase, bears: state.bears, clear: state.removeAllBears}))
-  console.log("🚀 ~ file: App.tsx:9 ~ App ~ clear", clear)
+  const {state} = useStore((state) => ({state: state}))
+  console.log("🚀 ~ file: App.tsx:9 ~ App ~ clear", state)
 
   return (
     <div className="App">
@@ -20,11 +20,11 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => {setCount((count) => count + 1); increase(1)}}>
-          count is {count}, bears is {bears}
+        <button onClick={() => {setCount((count) => count + 1); state.increase(1)}}>
+          count is {count}, bears is {state.cart}
         </button>
         <p>
-          Edit <code onClick={() =>clear()}>src/App.tsx</code> and save to test HMR
+          Edit <code onClick={() =>state.addBear()}>src/App.tsx</code> and save to test HMR
         </p>
       </div>
       <p className="read-the-docs">

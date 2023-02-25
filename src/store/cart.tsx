@@ -1,27 +1,19 @@
-import { create } from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
-import { immer } from 'zustand/middleware/immer'
+import { StateCreator } from 'zustand'
+import { BearSlice } from './Bear';
 
-interface CartState {
-  bears: number;
+export interface CartSlice {
+  cart: number;
   increase: (by: number) => void;
   removeAllBears: () => void;
 }
 
-const useCartStore = create<CartState>()(
-  devtools(
-    persist(
-      immer(
-   (set) => ({
-      bears: 0,
+const createCartSlice: StateCreator<BearSlice & CartSlice,[["zustand/immer", never],["zustand/devtools", never], ["zustand/persist", unknown]],[],CartSlice> =
+    (set) => ({
+      cart: 0,
       increase: (by: number) => set((state) => {
-        state.bears += by
+        state.cart += by
       }),
-      removeAllBears: () => set({ bears: 0 }),
-    })),
-    {
-      name: 'cart-storage',
-    })
-  ));
+      removeAllBears: () => set({ cart: 0 }),
+    });
 
-export default useCartStore;
+export default createCartSlice;
